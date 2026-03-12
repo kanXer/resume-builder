@@ -141,16 +141,6 @@ export default function ResumeBuilder() {
             </h1>
             <p className="text-gray-700 font-bold mt-2">Create professional resumes in minutes.</p>
           </div>
-          
-          <button
-            onClick={generatePDF}
-            disabled={loading}
-            className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-xl font-black text-lg flex items-center gap-3 shadow-2xl transition-all active:scale-95 disabled:opacity-70"
-          >
-            {loading ? <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin" /> : <FileDown size={24} />}
-            {loading ? "Generating..." : "Generate PDF"}
-          </button>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
@@ -316,7 +306,15 @@ export default function ResumeBuilder() {
                 </div>
               </div>
             </div>
-
+            <button
+            onClick={generatePDF}
+            disabled={loading}
+            className="bg-blue-700 hover:bg-blue-800 text-white px-10 py-4 rounded-xl font-black text-lg flex items-center gap-3 shadow-2xl transition-all active:scale-95 disabled:opacity-70"
+          >
+            {loading ? <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin" /> : <FileDown size={24} />}
+            {loading ? "Generating..." : "Generate PDF"}
+          </button>
+        </div>
           </div>
         </div>
 
@@ -380,3 +378,4 @@ export default function ResumeBuilder() {
   );
 
 }
+
