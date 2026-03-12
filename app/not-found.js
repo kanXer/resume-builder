@@ -42,7 +42,7 @@ export default function NotFound() {
 
         {/* Title */}
         <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-6 leading-tight">
-          PDF<span className="text-blue-500">Tools</span> <br /> 
+          Make<span className="text-blue-500">Your PDF</span> <br /> 
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-purple-500">
             Is Launching Soon
           </span>
@@ -89,4 +89,5 @@ export default function NotFound() {
       </footer>
     </div>
   );
+
 }
