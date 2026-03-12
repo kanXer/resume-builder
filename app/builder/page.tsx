@@ -110,7 +110,7 @@ export default function ResumeBuilder() {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/generate-resume", {
+      const res = await fetch("https://resume-builder-api-5isu.onrender.com/generate-resume", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -118,7 +118,7 @@ export default function ResumeBuilder() {
       const blob = await res.blob();
       setPdfUrl(URL.createObjectURL(blob));
     } catch {
-      alert("Backend start karo http://localhost:8000/generate-resume");
+      alert("Server Not Started");
     }
     setLoading(false);
   }
@@ -378,4 +378,5 @@ export default function ResumeBuilder() {
       `}</style>
     </div>
   );
+
 }
