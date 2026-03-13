@@ -40,7 +40,7 @@ export default function TemplatesPage() {
   const currentTemplates = allTemplates.slice(indexOfFirstItem, indexOfLastItem);
 
   // Page change hone par top par scroll karne ke liye
-  const paginate = (pageNumber) => {
+  const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -127,4 +127,5 @@ export default function TemplatesPage() {
       </div>
     </div>
   );
+
 }
