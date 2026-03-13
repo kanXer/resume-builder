@@ -49,7 +49,7 @@ export default function Footer() {
               <li><Link href="/blog" className="hover:text-blue-600 transition">Career Blog</Link></li>
               <li><Link href="/guide" className="hover:text-blue-600 transition">Resume Guide</Link></li>
               <li><Link href="/tips" className="hover:text-blue-600 transition">Interview Tips</Link></li>
-              <li><Link href="/support" className="hover:text-blue-600 transition">Support</Link></li>
+              <li><Link href="/contact" className="hover:text-blue-600 transition">Support</Link></li>
             </ul>
           </div>
 
@@ -88,3 +88,4 @@ export default function Footer() {
   );
 
 }
+
