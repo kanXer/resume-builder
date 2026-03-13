@@ -29,9 +29,9 @@ export default function Navbar() {
 
         {/* Desktop & Mobile CTA */}
         <div className="flex items-center gap-2">
-          <Link href="/builder" className="md:block xs:block hidden">
+          <Link href="/builder?template=template1" className="md:block xs:block hidden">
             <button className="bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-all">
-              Start Building
+              Start Building Free
             </button>
           </Link>
 
@@ -51,7 +51,7 @@ export default function Navbar() {
           <Link href="/#features" onClick={() => setIsOpen(false)} className="block font-medium text-gray-600 hover:text-blue-600">Features</Link>
           <Link href="/templates" onClick={() => setIsOpen(false)} className="block font-medium text-gray-600 hover:text-blue-600">Templates</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className="block font-medium text-gray-600 hover:text-blue-600">About</Link>
-          <Link href="/template" onClick={() => setIsOpen(false)} className="block">
+          <Link href="/builder?template=template1" onClick={() => setIsOpen(false)} className="block">
             <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
               Start Building Free
             </button>
@@ -60,4 +60,5 @@ export default function Navbar() {
       )}
     </nav>
   );
+
 }
