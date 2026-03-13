@@ -30,7 +30,7 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Link href="/builder">
             <button className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all w-full md:w-auto">
-              Create My Resume Now
+              Create with Simple Template Now
             </button>
           </Link>
           <Link href="/templates">
