@@ -111,7 +111,7 @@ function ResumeBuilderContent() {
     }
 
     try {
-      const res = await fetch("http://localhost:8000/generate-resume", {
+      const res = await fetch("https://resume-builder-api-5isu.onrender.com/generate-resume", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
@@ -358,4 +358,5 @@ export default function ResumeBuilder() {
       <ResumeBuilderContent />
     </Suspense>
   );
+
 }
