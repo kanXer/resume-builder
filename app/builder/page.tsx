@@ -322,14 +322,33 @@ function ResumeBuilderContent() {
           <div className="fixed inset-0 z-[110] bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm">
             <div className="bg-white w-full max-w-5xl h-[92vh] rounded-[2.5rem] flex flex-col overflow-hidden shadow-2xl">
               <div className="p-6 bg-gray-50 flex justify-between items-center border-b-2">
-                <div className="block">
-                  <h2 className="font-black text-2xl text-black flex items-center gap-2"><CheckCircle className="text-green-600"/> PDF READY</h2>
-                </div>
-                <div className="flex gap-4">
-                  <button onClick={() => setPdfUrl(null)} className="font-black text-gray-400 hover:text-red-500 uppercase text-xs">Discard</button>
-                  <a href={pdfUrl} download="Resume.pdf" className="bg-blue-700 hover:bg-black text-white px-8 py-3 rounded-xl font-black text-sm flex items-center gap-2 transition-all">
-                    <FileDown size={18}/> DOWNLOAD
-                  </a>
+                <div className="p-6 bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-2">
+                  {/* Left Side: Title */}
+                  <div className="block">
+                    <h2 className="font-black text-2xl text-black flex items-center gap-2">
+                      <CheckCircle className="text-green-600"/> PDF READY
+                    </h2>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">
+                      Style: {templateId}
+                    </p>
+                  </div>
+                
+                  {/* Right Side: Buttons (Ab ye mobile par niche line mein automatic aa jayenge) */}
+                  <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-4 sm:pt-0">
+                    <button 
+                      onClick={() => setPdfUrl(null)} 
+                      className="font-black text-gray-400 hover:text-red-500 uppercase text-xs transition-colors"
+                    >
+                      Discard
+                    </button>
+                    <a 
+                      href={pdfUrl} 
+                      download="Resume.pdf" 
+                      className="bg-blue-700 hover:bg-black text-white px-8 py-3 rounded-xl font-black text-sm flex items-center gap-2 shadow-lg transition-all active:scale-95"
+                    >
+                      <FileDown size={18}/> DOWNLOAD
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="flex-1 bg-gray-300 relative">
@@ -357,4 +376,5 @@ export default function ResumeBuilder() {
     </Suspense>
   );
 }
+
 
