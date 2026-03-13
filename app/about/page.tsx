@@ -4,13 +4,6 @@ import { ShieldCheck, Zap, Cpu, FileText, Github, Linkedin } from 'lucide-react'
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Navigation Placeholder */}
-      <nav className="border-bottom border-gray-100 py-4 px-6 flex justify-between items-center max-w-7xl mx-auto">
-        <div className="text-2xl font-bold text-blue-600">PDF<span className="text-gray-900">Tools</span></div>
-        <Link href="/" className="text-sm font-medium hover:text-blue-600 transition-colors">
-          Back to Home
-        </Link>
-      </nav>
 
       {/* Hero Section */}
       <section className="py-20 px-6 bg-slate-50">

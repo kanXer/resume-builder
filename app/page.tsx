@@ -33,9 +33,9 @@ export default function HomePage() {
               Create My Resume Now
             </button>
           </Link>
-          <Link href="/notfound">
+          <Link href="/templates">
             <button className="border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-50 transition w-full md:w-auto">
-              View Templates (Coming Soon)
+              View Templates
             </button>
           </Link>
         </div>

@@ -11,7 +11,7 @@ export default function Navbar() {
           <div className="bg-blue-600 p-1.5 rounded-lg group-hover:bg-blue-700 transition-colors">
             <FileText className="text-white w-6 h-6" />
           </div>
-          <span className="text-2xl font-bold tracking-tight">
+          <span className="text-2xl font-bold text-black tracking-tight">
             Make <span className="text-blue-600">Your Resume</span>
           </span>
         </Link>
@@ -21,9 +21,9 @@ export default function Navbar() {
           <a href="/#features" className="hover:text-blue-600 transition-colors cursor-pointer">
             Features
           </a>
-          {/* <Link href="/templates" className="hover:text-blue-600 transition-colors">
+          <Link href="/templates" className="hover:text-blue-600 transition-colors">
             Templates
-          </Link> */}
+          </Link>
           <a href="/about" className="hover:text-blue-600 transition-colors">
             About
           </a>

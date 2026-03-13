@@ -81,8 +81,8 @@ export default function Footer() {
             © {currentYear} AI Resume Builder. All rights reserved. Made with ❤️ for job seekers.
           </p>
           <div className="flex gap-6 text-sm text-gray-400">
-            <a href="/not-found" className="hover:text-gray-600 transition">Privacy Policy</a>
-            <a href="/not-found" className="hover:text-gray-600 transition">Terms of Service</a>
+            <a href="/privacy" className="hover:text-gray-600 transition">Privacy Policy</a>
+            <a href="/terms" className="hover:text-gray-600 transition">Terms of Service</a>
             <a href="/not-found" className="hover:text-gray-600 transition">Cookies</a>
           </div>
         </div>
