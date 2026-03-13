@@ -7,9 +7,9 @@ const allTemplates = [
   { id: "template1", name: "Simple", color: "bg-blue-600", tag: "Popular", icon: <Zap size={16} />, image: "/template1.jpg" },
   { id: "template2", name: "Modern", color: "bg-gray-800", tag: "Senior", icon: <Shield size={16} />, image: "/template2.jpg" },
   { id: "template3", name: "Minimalist", color: "bg-purple-600", tag: "Designer", icon: <Sparkles size={16} />, image: "/template3.jpg" },
-  { id: "template4", name: "Creative", color: "bg-amber-600", tag: "Premium", icon: <Star size={16} />, image: "/template4.jpg" },
-  { id: "template5", name: "Executive", color: "bg-emerald-600", tag: "New", icon: <Zap size={16} />, image: "/template5.jpg" },
-  { id: "template6", name: "Professional", color: "bg-emerald-600", tag: "New", icon: <Zap size={16} />, image: "/template7.jpg" },
+  // { id: "template4", name: "Creative", color: "bg-amber-600", tag: "Premium", icon: <Star size={16} />, image: "/template4.jpg" },
+  // { id: "template5", name: "Executive", color: "bg-emerald-600", tag: "New", icon: <Zap size={16} />, image: "/template5.jpg" },
+  // { id: "template6", name: "Professional", color: "bg-emerald-600", tag: "New", icon: <Zap size={16} />, image: "/template7.jpg" },
   // Aap yahan aur 8-10 templates add kar sakte hain test karne ke liye
 ];
 
@@ -129,3 +129,4 @@ export default function TemplatesPage() {
   );
 
 }
+
