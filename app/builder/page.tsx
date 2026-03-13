@@ -103,7 +103,6 @@ function ResumeBuilderContent() {
 
   async function generatePDF() {
     setLoading(true);
-    // JSON mein 'template' field add kar di gayi hai
     let payload = { ...formData, template: templateId };
     
     if (payload.experience.length === 1 && !payload.experience[0].company) {
@@ -119,7 +118,7 @@ function ResumeBuilderContent() {
       const blob = await res.blob();
       setPdfUrl(URL.createObjectURL(blob));
     } catch {
-      alert("Backend error! Please check if your Python server is running.");
+      alert("Backend error! Please check if your server is running.");
     }
     setLoading(false);
   }
@@ -130,10 +129,10 @@ function ResumeBuilderContent() {
   const Required = <span className="text-red-600">*</span>;
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4 md:px-8 font-sans">
+    <div className="min-h-screen bg-gray-100 py-10 px-4 md:px-8 font-sans pb-24">
       <div className="max-w-6xl mx-auto">
         
-        {/* --- HEADER --- */}
+        {/* --- HEADER (Button removed from here) --- */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
           <div>
             <h1 className="text-4xl font-black text-black flex items-center gap-3">
@@ -141,23 +140,11 @@ function ResumeBuilderContent() {
             </h1>
             <p className="text-gray-700 font-bold mt-2">Selected Style: <span className="text-blue-700 uppercase px-3 py-1 bg-blue-50 rounded-lg border border-blue-200">{templateId}</span></p>
           </div>
-          
-          <button
-            onClick={generatePDF}
-            disabled={loading}
-            className="bg-blue-700 hover:bg-black text-white px-10 py-4 rounded-xl font-black text-lg flex items-center gap-3 shadow-2xl transition-all active:scale-95 disabled:opacity-70 group"
-          >
-            {loading ? <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin" /> : <FileDown size={24} className="group-hover:translate-y-1 transition-transform" />}
-            {loading ? "Generating..." : "Generate PDF"}
-          </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
           {/* --- LEFT COLUMN --- */}
           <div className="lg:col-span-8 space-y-8">
-            
-            {/* PERSONAL INFO SECTION */}
             <section className="bg-white p-8 rounded-2xl shadow-md border-t-4 border-blue-700">
               <div className="flex items-center gap-3 mb-6">
                 <User size={24} className="text-blue-700 font-bold"/>
@@ -195,7 +182,6 @@ function ResumeBuilderContent() {
               </div>
             </section>
 
-            {/* EXPERIENCE SECTION */}
             <section className="bg-white p-8 rounded-2xl shadow-md border-t-4 border-orange-600">
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-3">
@@ -222,7 +208,6 @@ function ResumeBuilderContent() {
               ))}
             </section>
 
-            {/* EDUCATION SECTION */}
             <section className="bg-white p-8 rounded-2xl shadow-md border-t-4 border-purple-700">
               <div className="flex justify-between items-center mb-6">
                 <div className="flex items-center gap-3">
@@ -247,8 +232,6 @@ function ResumeBuilderContent() {
 
           {/* --- RIGHT COLUMN --- */}
           <div className="lg:col-span-4 space-y-8">
-            
-            {/* SKILLS */}
             <div className="bg-white p-6 rounded-2xl shadow-md border-t-4 border-green-600">
               <h3 className="font-black text-black uppercase mb-4 flex items-center gap-2"><Settings size={20} className="text-green-600"/> Skills</h3>
               <div className="space-y-2">
@@ -262,7 +245,6 @@ function ResumeBuilderContent() {
               <button onClick={() => addArrayItem("skills")} className="w-full mt-3 py-2 border-2 border-dashed text-black border-gray-300 rounded-xl text-xs font-black hover:bg-green-50 transition-colors">+ ADD SKILL</button>
             </div>
 
-            {/* STRENGTHS */}
             <div className="bg-white p-6 rounded-2xl shadow-md border-t-4 border-yellow-500">
               <h3 className="font-black text-black uppercase mb-4 flex items-center gap-2"><Award size={20} className="text-yellow-600"/> Strengths</h3>
               <div className="space-y-2">
@@ -276,7 +258,6 @@ function ResumeBuilderContent() {
               <button onClick={() => addArrayItem("strengths")} className="w-full mt-3 py-2 border-2 border-dashed text-black border-gray-300 rounded-xl text-xs font-black hover:bg-yellow-50 transition-colors">+ ADD STRENGTH</button>
             </div>
 
-            {/* CERTIFICATIONS */}
             <div className="bg-white p-6 rounded-2xl shadow-md border-t-4 border-cyan-500">
               <h3 className="font-black text-black uppercase mb-4 flex items-center gap-2"><CheckCircle size={20} className="text-cyan-600"/> Certifications</h3>
               <div className="space-y-2">
@@ -290,7 +271,6 @@ function ResumeBuilderContent() {
               <button onClick={() => addArrayItem("certifications")} className="w-full mt-3 py-2 border-2 border-dashed border-gray-300 text-black rounded-xl text-xs font-black hover:bg-cyan-50 transition-colors">+ ADD CERTIFICATE</button>
             </div>
 
-            {/* DARK INFO CARD */}
             <div className="bg-black p-8 rounded-[2.5rem] shadow-2xl text-white border-b-8 border-blue-700">
               <h3 className="font-black text-xl mb-6 flex items-center gap-2 border-b border-gray-800 pb-3 uppercase tracking-tighter">
                 <Plus size={24} className="text-blue-500"/> Other Details
@@ -309,12 +289,30 @@ function ResumeBuilderContent() {
           </div>
         </div>
 
+        {/* --- FLOATING GENERATE BUTTON --- */}
+        <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100]">
+          <button
+            onClick={generatePDF}
+            disabled={loading}
+            className="bg-blue-700 hover:bg-black text-white px-8 py-4 md:px-12 md:py-5 rounded-full md:rounded-2xl font-black text-lg flex items-center gap-3 shadow-[0_15px_40px_rgba(29,78,216,0.4)] transition-all active:scale-90 hover:-translate-y-2 disabled:opacity-70 group"
+          >
+            {loading ? (
+              <div className="h-6 w-6 border-4 border-white border-t-transparent rounded-full animate-spin" />
+            ) : (
+              <FileDown size={28} className="group-hover:bounce" />
+            )}
+            <span className={loading ? "ml-2" : ""}>
+              {loading ? "Generating..." : "GENERATE PDF"}
+            </span>
+          </button>
+        </div>
+
         {/* LOADING MODAL */}
         {loading && (
           <div className="fixed inset-0 z-[150] bg-black/80 backdrop-blur-md flex items-center justify-center">
-            <div className="bg-white p-12 rounded-[3rem] text-center border-b-[10px] border-blue-700 shadow-2xl animate-in zoom-in-90">
+            <div className="bg-white p-12 rounded-[3rem] text-center border-b-[10px] border-blue-700 shadow-2xl">
               <div className="w-24 h-24 border-[8px] border-blue-700 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-              <h2 className="text-xl font-black text-blue-700  italic">Generating PDF...</h2>
+              <h2 className="text-xl font-black text-blue-700 italic">Processing Data...</h2>
             </div>
           </div>
         )}
@@ -326,11 +324,11 @@ function ResumeBuilderContent() {
               <div className="p-6 bg-gray-50 flex justify-between items-center border-b-2">
                 <div>
                   <h2 className="font-black text-2xl text-black flex items-center gap-2"><CheckCircle className="text-green-600"/> PDF READY</h2>
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest tracking-widest uppercase mt-1">Template: {templateId}</p>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Style: {templateId}</p>
                 </div>
                 <div className="flex gap-4">
-                  <button onClick={() => setPdfUrl(null)} className="font-black text-gray-400 hover:text-red-500 uppercase text-xs transition-colors">Discard</button>
-                  <a href={pdfUrl} download="Resume.pdf" className="bg-blue-700 hover:bg-black text-white px-8 py-3 rounded-xl font-black text-sm flex items-center gap-2 shadow-lg transition-all">
+                  <button onClick={() => setPdfUrl(null)} className="font-black text-gray-400 hover:text-red-500 uppercase text-xs">Discard</button>
+                  <a href={pdfUrl} download="Resume.pdf" className="bg-blue-700 hover:bg-black text-white px-8 py-3 rounded-xl font-black text-sm flex items-center gap-2 transition-all">
                     <FileDown size={18}/> DOWNLOAD
                   </a>
                 </div>
@@ -346,17 +344,17 @@ function ResumeBuilderContent() {
       <style jsx global>{`
         .animate-spin-slow { animation: spin 8s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        .group-hover\:bounce { animation: bounce 0.6s infinite; }
       `}</style>
     </div>
   );
 }
 
-// Final Export wrapped in Suspense
 export default function ResumeBuilder() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black text-2xl bg-gray-100 uppercase italic">Loading Resume Builder...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center font-black text-2xl bg-gray-100 uppercase italic">Loading...</div>}>
       <ResumeBuilderContent />
     </Suspense>
   );
-
 }
