@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Analytics } from "@vercel/analytics/next"
+import NextTopLoader from 'nextjs-toploader';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     siteName: "PDFTools",
     locale: "en_US",
     type: "website",
+    images: ["/banner.png"],
   },
 };
 export default function RootLayout({
@@ -45,6 +47,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
+        <NextTopLoader color="#2563eb" showSpinner={true} />
         {children}
         <Footer />
         <Analytics/>

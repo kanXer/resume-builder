@@ -12,12 +12,17 @@ export default function Navbar() {
         
         {/* Logo Section */}
         <Link href="/" className="flex items-center gap-2 group">
-          <div className="bg-blue-600 p-1.5 rounded-lg group-hover:bg-blue-700 transition-colors">
+          <div className="bg-blue-600 p-1.5 rounded-xl group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-blue-200">
             <FileText className="text-white w-5 h-5 md:w-6 md:h-6" />
           </div>
-          <span className="text-xl md:text-2xl font-bold text-black tracking-tight">
-            Make <span className="text-blue-600">Your Resume</span>
-          </span>
+          <div className="flex flex-col leading-none">
+            <span className="text-xl md:text-2xl font-black italic uppercase tracking-tighter text-slate-900">
+              MAKE<span className="text-blue-600"> YOUR RESUME</span>
+            </span>
+            <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-slate-400 mt-0.5">
+              Powering your next big move.
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
@@ -29,9 +34,9 @@ export default function Navbar() {
 
         {/* Desktop & Mobile CTA */}
         <div className="flex items-center gap-2">
-          <Link href="/builder?template=template1" className="md:block xs:block hidden">
+          <Link href="/templates" className="md:block xs:block hidden">
             <button className="bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-all">
-              Start Building Free
+              Start Building
             </button>
           </Link>
 
@@ -51,7 +56,7 @@ export default function Navbar() {
           <Link href="/#features" onClick={() => setIsOpen(false)} className="block font-medium text-gray-600 hover:text-blue-600">Features</Link>
           <Link href="/templates" onClick={() => setIsOpen(false)} className="block font-medium text-gray-600 hover:text-blue-600">Templates</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className="block font-medium text-gray-600 hover:text-blue-600">About</Link>
-          <Link href="/builder?template=template1" onClick={() => setIsOpen(false)} className="block">
+          <Link href="/templates" onClick={() => setIsOpen(false)} className="block">
             <button className="w-full bg-blue-600 text-white py-3 rounded-xl font-bold">
               Start Building Free
             </button>
@@ -60,5 +65,4 @@ export default function Navbar() {
       )}
     </nav>
   );
-
 }

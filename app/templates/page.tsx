@@ -1,132 +1,173 @@
 "use client";
 import { useState, useEffect } from "react";
-import { CheckCircle, ArrowRight, Star, Zap, Shield, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
-import Link from "next/link";
-
-const allTemplates = [
-  { id: "template1", name: "Simple", color: "bg-blue-600", tag: "Popular", icon: <Zap size={16} />, image: "/template1.jpg" },
-  { id: "template2", name: "Modern", color: "bg-gray-800", tag: "Senior", icon: <Shield size={16} />, image: "/template2.jpg" },
-  { id: "template3", name: "Minimalist", color: "bg-purple-600", tag: "Designer", icon: <Sparkles size={16} />, image: "/template3.jpg" },
-  // { id: "template4", name: "Creative", color: "bg-amber-600", tag: "Premium", icon: <Star size={16} />, image: "/template4.jpg" },
-  // { id: "template5", name: "Executive", color: "bg-emerald-600", tag: "New", icon: <Zap size={16} />, image: "/template5.jpg" },
-  // { id: "template6", name: "Professional", color: "bg-emerald-600", tag: "New", icon: <Zap size={16} />, image: "/template7.jpg" },
-  // Aap yahan aur 8-10 templates add kar sakte hain test karne ke liye
-];
+import { ArrowRight, X, Loader2, Sparkles, Zap, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export default function TemplatesPage() {
-  const [selected, setSelected] = useState("template1");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8); // Default PC ke liye 8
+  const router = useRouter();
+  const [allTemplates, setAllTemplates] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isNavigating, setIsNavigating] = useState(false); 
+  const [previewTemplate, setPreviewTemplate] = useState<any>(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setItemsPerPage(4); // Mobile par 4
-      } else {
-        setItemsPerPage(8); // PC par 8
+    async function loadTemplates() {
+      try {
+        const response = await fetch("/api/templates");
+        const data = await response.json();
+        setAllTemplates(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("Failed to load templates", err);
+      } finally {
+        setLoading(false);
       }
-    };
-
-    handleResize(); // Initial check
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    }
+    loadTemplates();
   }, []);
 
-  const totalPages = Math.ceil(allTemplates.length / itemsPerPage);
-  
-  // Current items to display
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentTemplates = allTemplates.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Page change hone par top par scroll karne ke liye
-  const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleSelectAndBuild = (templateId: string) => {
+    setIsNavigating(true);
+    setTimeout(() => router.push(`/builder?template=${templateId}`), 600);
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-10 md:py-16 px-4 md:px-6">
-      <div className="max-w-7xl mx-auto text-center mb-10 md:mb-16">
-        <h1 className="text-3xl md:text-5xl font-black text-black mb-3 italic uppercase tracking-tighter">
-          Choose <span className="text-blue-700">Template</span>
-        </h1>
-        <p className="text-gray-500 font-bold uppercase tracking-widest text-[10px] md:text-sm">
-          Select an A4-optimized layout to start building.
-        </p>
-        <p className="inline-flex items-center content-center  gap-1 text-red-600 bg-red-50 px-2 py-0.5 rounded md:rounded-md font-bold uppercase tracking-widest text-[9px] md:text-[11px] border border-red-100">
-          <span className="text-[12px]">⚠️</span> Simple Template is selected by default
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 mb-12">
-        {currentTemplates.map((t) => (
-          <div 
-            key={t.id}
-            onClick={() => setSelected(t.id)}
-            className={`group cursor-pointer bg-white rounded-2xl md:rounded-3xl overflow-hidden border-2 md:border-4 transition-all duration-500 shadow-lg md:shadow-2xl relative
-              ${selected === t.id ? 'border-blue-600 scale-[1.02] md:scale-105 shadow-blue-100' : 'border-transparent hover:border-gray-200'}`}
-          >
-            <div className={`relative aspect-[1/1.41] w-full ${t.color} overflow-hidden border-b`}>
-              <img src={t.image} alt={t.name} className="absolute inset-0 w-full h-full object-cover object-top" />
-              {selected === t.id && (
-                <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-blue-600 text-white p-1 md:p-2 rounded-full z-20 shadow-xl">
-                  <CheckCircle size={18} className="md:w-6 md:h-6" />
-                </div>
-              )}
-            </div>
-            <div className="p-3 md:p-5 bg-white">
-              <div className="flex items-center gap-2 mb-1 md:mb-3">
-                <div className={`p-1 md:p-2 rounded md:rounded-lg text-white ${t.color}`}>{t.icon}</div>
-                <span className="text-[8px] md:text-[10px] font-black text-blue-700 uppercase tracking-tighter">{t.tag}</span>
-              </div>
-              <h3 className="text-sm md:text-lg font-black text-black truncate">{t.name}</h3>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Pagination UI - Only shows if more than 1 page exists */}
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-4 mb-12">
-          <button 
-            disabled={currentPage === 1}
-            onClick={() => paginate(currentPage - 1)}
-            className="p-2 rounded-full bg-white border shadow-sm disabled:opacity-30 hover:bg-gray-100 transition-all active:scale-90"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <div className="flex gap-2">
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => paginate(i + 1)}
-                className={`h-2.5 rounded-full transition-all duration-300 ${currentPage === i + 1 ? 'w-8 bg-blue-600' : 'w-2.5 bg-gray-300 hover:bg-gray-400'}`}
-              />
-            ))}
-          </div>
-
-          <button 
-            disabled={currentPage === totalPages}
-            onClick={() => paginate(currentPage + 1)}
-            className="p-2 rounded-full bg-white border shadow-sm disabled:opacity-30 hover:bg-gray-100 transition-all active:scale-90"
-          >
-            <ChevronRight size={24} />
-          </button>
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#fcfcfd]">
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 border-t-2 border-blue-600 rounded-full animate-spin"></div>
+          <Sparkles className="absolute inset-0 m-auto text-blue-600 animate-pulse" size={24} />
         </div>
-      )}
-
-      <div className="flex justify-center">
-        <Link 
-          href={`/builder?template=${selected}`}
-          className="bg-black hover:bg-blue-700 text-white w-full md:w-auto md:px-20 py-4 md:py-5 rounded-xl md:rounded-2xl font-black text-lg md:text-xl flex items-center justify-center gap-3 shadow-2xl transition-all active:scale-95 group"
-        >
-          Customize Template <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-        </Link>
       </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#fcfcfd] text-slate-900 py-12 md:py-20 px-4 md:px-6 relative selection:bg-blue-100">
+      <div className="max-w-7xl mx-auto relative z-10">
+        <header className="mb-16 md:mb-24 text-center">
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] mb-6 shadow-sm"
+          >
+            <Zap size={12} fill="currentColor" /> Premium Collection
+          </motion.div>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-6xl font-black tracking-tighter italic uppercase leading-[0.9] mb-6 text-slate-900"
+          >
+            Choose Your <span className="text-blue-600">Template</span>
+          </motion.h1>
+          <p className="text-slate-500 font-bold max-w-lg mx-auto text-[10px] md:text-xs uppercase tracking-[0.2em] leading-relaxed opacity-70">
+            Selected Layouts • Built for the top 1% <br/>Choose your blueprint.
+          </p>
+        </header>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+          {allTemplates.map((t, index) => (
+            <motion.div 
+              key={t._id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => setPreviewTemplate(t)}
+              className="group relative cursor-pointer"
+            >
+              <div className="relative bg-white border border-slate-100 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden transition-all duration-700 group-hover:border-blue-200 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)]">
+                <div className="relative aspect-[4/5] overflow-hidden p-3 md:p-4">
+                  <img src={t.image} alt={t.name} className="w-full h-full object-cover rounded-[1.8rem] md:rounded-[2rem] transition-all duration-1000 group-hover:scale-105" />
+                  {index === 0 && (
+                    <div className="absolute top-8 left-8">
+                      <div className="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-black text-[8px] md:text-[9px] uppercase tracking-widest shadow-xl flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span> Hot
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="px-8 pb-8 pt-2 flex items-center justify-between">
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-black italic uppercase tracking-tighter text-slate-900">{t.name}</h3>
+                    <p className="text-blue-600 text-[9px] font-black uppercase tracking-[0.2em]">{t.tag || "Standard"}</p>
+                  </div>
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all duration-500">
+                    <ArrowRight size={16} className="-rotate-45 group-hover:rotate-0 transition-transform" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {previewTemplate && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6 lg:p-12 overflow-hidden">
+            <motion.div 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => !isNavigating && setPreviewTemplate(null)} 
+              className="absolute inset-0 bg-white/90 backdrop-blur-xl"
+            />
+            
+            <motion.div 
+              layoutId={previewTemplate.id}
+              initial={{ y: "100%" }} animate={{ y: 0 }} exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="relative bg-white w-full h-full md:h-auto md:max-h-[90vh] md:max-w-5xl md:rounded-[3rem] overflow-y-auto md:overflow-hidden border border-slate-100 shadow-2xl flex flex-col md:flex-row"
+            >
+              {/* Close Button - Sticky on Mobile */}
+              <button 
+                onClick={() => setPreviewTemplate(null)} 
+                className="fixed md:absolute top-6 right-6 z-[120] w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-md md:bg-slate-50 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-full transition-all border border-slate-100 shadow-sm"
+              >
+                <X size={18} />
+              </button>
+
+              {/* Left Column: Image */}
+              <div className="w-full md:w-1/2 bg-[#f8fafc] p-8 md:p-12 flex items-center justify-center">
+                <img src={previewTemplate.image} className="w-full max-w-[280px] md:max-w-full rounded-xl shadow-lg md:shadow-2xl" />
+              </div>
+
+              {/* Right Column: Content */}
+              <div className="w-full md:w-1/2 p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-white">
+                <div className="space-y-6 md:space-y-8">
+                  <header>
+                    <div className="text-blue-600 text-[9px] font-black uppercase tracking-[0.3em] mb-3">Blueprint Specs</div>
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase italic tracking-tighter leading-[0.9] mb-4 text-slate-900 pr-12 md:pr-0 break-words">
+                      {previewTemplate.name}
+                    </h2>
+                    <p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">
+                      {previewTemplate.description}
+                    </p>
+                  </header>
+
+                  <div className="grid grid-cols-1 gap-3">
+                    {previewTemplate.features?.slice(0, 4).map((f: string, idx: number) => (
+                      <div key={idx} className="flex items-center gap-3 text-[11px] md:text-xs font-bold text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-100/50">
+                        <CheckCircle2 size={14} className="text-blue-600 shrink-0" />
+                        <span className="truncate">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button 
+                    disabled={isNavigating}
+                    onClick={() => handleSelectAndBuild(previewTemplate.id)}
+                    className={`group w-full py-5 md:py-6 rounded-2xl md:rounded-[2rem] font-black text-base md:text-lg transition-all flex items-center justify-center gap-3 shadow-lg active:scale-95
+                      ${isNavigating ? 'bg-slate-100 text-slate-400' : 'bg-slate-900 text-white hover:bg-blue-600'}`}
+                  >
+                    {isNavigating ? <Loader2 className="animate-spin" size={20} /> : (
+                      <>
+                        <span className="uppercase tracking-tight italic">Start Building</span>
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
-
 }
-

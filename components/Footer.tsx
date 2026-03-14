@@ -25,8 +25,8 @@ export default function Footer() {
               Next-gen resume builder, Gemini AI ki accuracy ke saath.
             </p>
             <div className="flex gap-5">
-              <a href="https://x.com/itsSrivastava_" className="text-gray-400 hover:text-blue-600 transition"><Twitter size={20} /></a>
-              <a href="https://www.linkedin.com/in/kanxer/" className="text-gray-400 hover:text-blue-600 transition"><Linkedin size={20} /></a>
+              <a href="#" className="text-gray-400 hover:text-blue-600 transition"><Twitter size={20} /></a>
+              <a href="#" className="text-gray-400 hover:text-blue-600 transition"><Linkedin size={20} /></a>
               <a href="https://github.com/kanXer" target="_blank" className="text-gray-400 hover:text-gray-900 transition"><Github size={20} /></a>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function Footer() {
               <li><Link href="/blog" className="hover:text-blue-600 transition">Career Blog</Link></li>
               <li><Link href="/guide" className="hover:text-blue-600 transition">Resume Guide</Link></li>
               <li><Link href="/tips" className="hover:text-blue-600 transition">Interview Tips</Link></li>
-              <li><Link href="/contact" className="hover:text-blue-600 transition">Support</Link></li>
+              <li><Link href="/support" className="hover:text-blue-600 transition">Support</Link></li>
             </ul>
           </div>
 
@@ -86,6 +86,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-
 }
-
