@@ -33,7 +33,15 @@ export const metadata: Metadata = {
     siteName: "PDFTools",
     locale: "en_US",
     type: "website",
-    images: [{"/banner.png",width: 1200,height: 630}],
+    images: [
+            {
+              // Local path ki jagah apna pura domain URL daalein
+              url: "https://your-domain-name.com/banner.png", 
+              width: 1200,
+              height: 630,
+              alt: "Resume Studio Banner",
+            }
+    ],
   },
 };
 export default function RootLayout({
