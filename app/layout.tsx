@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: "PDFTools",
     locale: "en_US",
     type: "website",
-    images: ["/banner.png"],
+    images: [{"/banner.png",width: 1200,height: 630}],
   },
 };
 export default function RootLayout({
