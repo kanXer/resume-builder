@@ -27,14 +27,14 @@ export default function HomePage() {
           Humara AI aapke skills ko analyse karke perfect ATS-friendly objectives likhta hai. 
           Bas details daalo aur resume ready!
         </p>
-        <div className="flex flex-col md:flex-row gap-4 justify-center cursor-pointer">
+        <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Link href="/builder">
-            <button className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all w-full md:w-auto">
+            <button className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all w-full md:w-auto cursor-pointer">
               Create with Simple Template Now
             </button>
           </Link>
           <Link href="/templates">
-            <button className="border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-50 transition w-full md:w-auto">
+            <button className="border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-50 transition w-full md:w-auto cursor-pointer">
               View Templates
             </button>
           </Link>
