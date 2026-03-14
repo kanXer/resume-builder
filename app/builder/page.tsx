@@ -8,7 +8,11 @@ import {
 } from "lucide-react";
 
 // --- REACT-PDF IMPORTS ---
-import { Document, Page, pdfjs } from 'react-pdf';
+// Change this:
+// import { Document, Page, pdfjs } from 'react-pdf';
+
+// To this (if needed):
+import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack5';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
