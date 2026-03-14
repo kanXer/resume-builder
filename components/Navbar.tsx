@@ -35,7 +35,7 @@ export default function Navbar() {
         {/* Desktop & Mobile CTA */}
         <div className="flex items-center gap-2">
           <Link href="/templates" className="md:block xs:block hidden">
-            <button className="bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-all">
+            <button className="bg-gray-900 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-blue-600 transition-all cursor-pointer">
               Start Building
             </button>
           </Link>
